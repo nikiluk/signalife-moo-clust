@@ -11,11 +11,11 @@ clc
 %% READ
 
 % file containing features
-filein_features = 'inventory-biocytin-raw-25-electrophydata.xlsx'; % file containing neuron features data in cells
+filein_features = 'inventory-biocytin-raw-29-electrophydata-regressionclasses.xlsx'; % file containing neuron features data in cells
 
 sheet = 1;
-xlRange = 'E3:BC33'; % BC = till Angle 16 cell
-xlRange_names = 'E1:BC1';
+xlRange = 'E3:AQ33'; % AQ angles grouped
+xlRange_names = 'E1:AQ1';
 xlRange_neuron_names = 'C3:C33';
 
 [features_all,~,~] = xlsread(filein_features, sheet, xlRange);
@@ -28,11 +28,11 @@ xlRange_neuron_names = 'C3:C33';
 % All
 % {'Diameter','D1','D2','Ramification','Striking','Lambda','Area','Oblate','Prolate','Sphericity','Volume','CB','BP','Dendrites','0-45','45-90','90-135','135-180'}
 % 27 - CB and 28 - BP in um
-feature_range = [5 8 11 18 23 24 27];
+feature_range = [10 20 25 30 31];
 
 
 testcases = 3; % default case that tests ++ +- and == CTIP2/SATB2
-ssi = 121; % parameter that affects the filname of the output
+ssi = 823; % parameter that affects the filname of the output
 PCA = 0; % 0-not use Principal Components; 1-use Principal Components
 
 addpath('SRC/exportfig');
@@ -181,7 +181,7 @@ cmap = cmap/255;
 %parallelcoords
 fp = figure('units','normalized','outerposition',[0 0 1 1]);
 set(fp,'DefaultAxesColorOrder',cmap);
-fp = parallelcoords(features_selected, 'group',optimalClustering, 'standardize','on', 'labels',features_names_selected, 'quantile',.25,'LineWidth', 2);
+fp = parallelcoords(features_selected, 'group',optimalClustering, 'standardize','on', 'labels',features_names_selected, 'quantile',.75,'LineWidth', 2);
 
 
 % %andrewsplot
