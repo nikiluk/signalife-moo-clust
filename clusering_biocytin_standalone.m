@@ -28,11 +28,11 @@ xlRange_neuron_names = 'C3:C33';
 % All
 % {'Diameter','D1','D2','Ramification','Striking','Lambda','Area','Oblate','Prolate','Sphericity','Volume','CB','BP','Dendrites','0-45','45-90','90-135','135-180'}
 % 27 - CB and 28 - BP in um
-feature_range = [10 20 25 30 31];
+feature_range = [25 30];
 
 
 testcases = 3; % default case that tests ++ +- and == CTIP2/SATB2
-ssi = 823; % parameter that affects the filname of the output
+ssi = 905; % parameter that affects the filname of the output
 PCA = 0; % 0-not use Principal Components; 1-use Principal Components
 
 addpath('SRC/exportfig');
