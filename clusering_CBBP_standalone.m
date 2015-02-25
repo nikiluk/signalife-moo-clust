@@ -22,13 +22,19 @@ xlRange_names = 'A1:BB1';
 
 %% FEATURE SELECTION
 
-% All
-% {'Diameter','D1','D2','Ramification','Striking','Lambda','Area','Oblate','Prolate','Sphericity','Volume','CB','BP','Dendrites','0-45','45-90','90-135','135-180'}
-% 27 - CB and 28 - BP in um
+% Diameter
+% Ramification
+% Area
+% Oblate
+% Sphericity
+% Volume
+% Bifurction
+% Depth
+% Dendrites
 feature_range = [7 10 13 20 25 26 27 28 29];
 
-testcases = 2;
-ssi = 114;
+testcases = 1;
+ssi = 224;
 PCA = 0;
 
 addpath('SRC/exportfig');
