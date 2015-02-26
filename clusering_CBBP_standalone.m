@@ -11,11 +11,11 @@ clc
 %% READ
 
 % file containing features
-filein_features = 'inventory83-raw-matching-percetage.xlsx'; % file containing neuron features data in cells
+filein_features = 'inventory90-YFP-layerdepth.xlsx'; % file containing neuron features data in cells
 
 sheet = 1;
-xlRange = 'A3:BB147'; % BB = till Angle 17 cell
-xlRange_names = 'A1:BB1';
+xlRange = 'A3:AL147'; % BB = till Angle 17 cell
+xlRange_names = 'A1:AL1';
 
 [features_all,~,~] = xlsread(filein_features, sheet, xlRange);
 [~,features_all_names,~] = xlsread(filein_features, sheet, xlRange_names);
@@ -31,10 +31,10 @@ xlRange_names = 'A1:BB1';
 % Bifurction
 % Depth
 % Dendrites
-feature_range = [7 10 13 20 25 26 27 28 29];
+feature_range = [7 10 13 20 25 26 28 29 31 33];
 
-testcases = 1;
-ssi = 224;
+testcases = 2;
+ssi = 001;
 PCA = 0;
 
 addpath('SRC/exportfig');
