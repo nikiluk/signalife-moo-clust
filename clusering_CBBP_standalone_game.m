@@ -31,13 +31,14 @@ xlRange_names = 'A1:AL1';
 % Bifurction
 % Depth
 % Dendrites
-%feature_range = [7 10 13 20 25 26 28 29 31 33]; %RDepth, CB and Depth
-%feature_range = [7 10 13 20 25 26 27 28 29 31 33]; 
-feature_range = [7 10 13 20 25 26 28 29 31 33];
+%feature_range = [7 10 13 20 25 26 29 28 31 33]; %Depth, CB, Layer Depth
+feature_range = [7 10 13 20 25 26 27 28 29]; %Bifurcation
+%feature_range = [10 20 25 29 28 33]; %Depth, Layer Depth
+%feature_range = [7 10 13 20 25 26 27 28]; %Bifurcation, Depth
+%feature_range = [7 10 13 20 25 26 27 34]; %Bifurcation, RDepth
 
-
-testcases = 1;
-ssi = 001;
+testcases = 2;
+ssi = 002;
 PCA = 0;
 
 addpath('SRC/exportfig');
@@ -48,7 +49,7 @@ silu=[];
 fs=[];
 
 % params
-class_number = 5;
+class_number = 3;
 iterations = 1000;
 
 
@@ -183,10 +184,10 @@ cmap = cmap/255;
 %% PARALLELPLOT
 
 %parallelcoords
-fp = figure('units','normalized','outerposition',[0 0 1 1]);
-set(fp,'DefaultAxesColorOrder',cmap);
-fp = parallelcoords(features_selected, 'group',optimalClustering, 'standardize','on', 'labels',features_names_selected, 'quantile',.25,'LineWidth', 2);
-ylim([-2.5 2.5])
+% fp = figure('units','normalized','outerposition',[0 0 1 1]);
+% set(fp,'DefaultAxesColorOrder',cmap);
+% fp = parallelcoords(features_selected, 'group',optimalClustering, 'standardize','on', 'labels',features_names_selected, 'quantile',.25,'LineWidth', 2);
+% ylim([-2.5 2.5])
 
 % %andrewsplot
 % fa = figure;
@@ -262,6 +263,57 @@ ylim([-2.5 2.5])
 % 
 % end
     
+%% GAME PROFILES
+
+% output to results folder
+resFolder=['res-' datestr(now,'yyyy-mm-dd')];
+mkdir(resFolder);
+
+
+addpath('SRC');
+
+
+mu1 = mean(features_selected(find(optimalClustering == 1),:));
+number1 = size(features_selected(find(optimalClustering == 1),:), 1);
+sem1 = std(features_selected(find(optimalClustering == 1),:))/sqrt(number1);
+
+fba1 = figure;
+glyphplot(mu1.','glyph','star','standardize','column','obslabels',features_names_selected.');
+
+
+
+
+fba1_img = [resFolder,'/', num2str(testcases) '-1' '.pdf'];
+export_fig(fba1_img, '-pdf');
+
+mu2 = mean(features_selected(find(optimalClustering == 2),:));
+number2 = size(features_selected(find(optimalClustering == 2),:), 1);
+sem2 = std(features_selected(find(optimalClustering == 2),:))/sqrt(number2);
+
+fba2 = figure;
+glyphplot(mu2.','glyph','star','standardize','column','obslabels',features_names_selected.');
+
+
+fba2_img = [resFolder,'/', num2str(testcases) '-2' '.pdf'];
+export_fig(fba2_img, '-pdf');
+
+if testcases==2
+% just adding this case for ++, when we have 3 clusters    
+mu3 = mean(features_selected(find(optimalClustering == 3),:));
+number3 = size(features_selected(find(optimalClustering == 3),:), 1);
+sem3 = std(features_selected(find(optimalClustering == 3),:))/sqrt(number3);
+
+
+fba3 = figure;
+glyphplot(mu3.','glyph','star','standardize','column','obslabels',features_names_selected.');
+
+
+fba3_img = [resFolder,'/', num2str(testcases) '-3' '.pdf'];
+export_fig(fba3_img, '-pdf');
+
+end
+
+
 %% WRITE TO FILE
 %adjusting comments in the filename
 features_names_selected_string = strjoin(features_names_selected,'-');
@@ -270,9 +322,7 @@ for cr=1:size(features_names_selected,2)
 features_names_selected_cropped = [features_names_selected_cropped, '-', features_names_selected{cr}(1:min(4, length(features_names_selected{cr})))];
 end;
 
-% output to results folder
-resFolder=['res-' datestr(now,'yyyy-mm-dd')];
-mkdir(resFolder);
+
 fileout_classes = [resFolder,'/out_classes_', num2str(ssi,'%03d'),'_', num2str(nn), 'CBBP_by',features_names_selected_cropped,'_(', num2str(nn_selected), markerclass_selected, ') PCA=',num2str(PCA),' (', num2str(cnumber) , ' classes)']; % file with classes distributed
 
 %output PDF figure with parallel plot

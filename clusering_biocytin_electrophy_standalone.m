@@ -11,10 +11,10 @@ clc
 %% READ
 
 % file containing features
-filein_features = 'inventory-biocytin-electrophy-raw-2.xlsx'; % file containing neuron electrophy features data in cells
+filein_features = 'inventory-biocytin-electrophy-raw-4.xlsx'; % file containing neuron electrophy features data in cells
 
 sheet = 1;
-xlRange = 'B2:AA34'; % BC = till Angle 16 cell
+xlRange = 'B2:AA34';
 xlRange_names = 'B1:AA1';
 xlRange_neuron_names = 'A2:A34';
 
@@ -25,11 +25,11 @@ xlRange_neuron_names = 'A2:A34';
 addpath('SRC/exportfig');
 %% FEATURE SELECTION
 
-feature_range = [1 2 3 4 7 8 9:13 20:26];
+feature_range = [1 2 8 9:13 20:26];
 
 %% PARAMS
 max_clusters = 4;
-iterations = 10;
+iterations = 100;
 testcases = 3; % default case that tests ++ +- and == CTIP2/SATB2
 ssi = 0; % parameter that affects the filname of the output
 PCA = 0; % 0-not use Principal Components; 1-use Principal Components
@@ -143,6 +143,9 @@ cmap = cmap/255;
 fp = figure('units','normalized','outerposition',[0 0 1 1]);
 set(fp,'DefaultAxesColorOrder',cmap);
 fp = parallelcoords(features_selected, 'group',optimalClustering, 'standardize','on', 'labels',features_names_selected, 'quantile',.25,'LineWidth', 2);
+a = gca;
+a.XTickLabelRotation=45;
+
 
 
 % %andrewsplot
@@ -159,11 +162,13 @@ for cr=1:size(features_names_selected,2)
 features_names_selected_cropped = [features_names_selected_cropped, '-', features_names_selected{cr}(1:min(4, length(features_names_selected{cr})))];
 end;
 
+% output to results folder
+resFolder=['res-' datestr(now,'yyyy-mm-dd')];
+mkdir(resFolder);
+fileout_classes = [resFolder,'/out_classes_', num2str(ssi,'%03d'),'_', num2str(nn), 'Biocytin_electrophy_by',features_names_selected_cropped,'_(', num2str(nn_selected), ') PCA=',num2str(PCA),' (', num2str(cnumber) , ' classes)']; % file with classes distributed
 
-fileout_classes = ['out_classes_', num2str(ssi,'%03d'),'_', num2str(nn), 'Biocytin_electrophy_by','_(', num2str(nn_selected), ') PCA=',num2str(PCA),' (', num2str(cnumber) , ' classes)']; % file with classes distributed
-
-fileout_classes_img = [fileout_classes '.png'];
-export_fig(fileout_classes_img, '-transparent');
+%output PDF figure with parallel plot
+export_fig([fileout_classes '.pdf'], '-pdf');
 
 
 xlswrite([fileout_classes '.xlsx'], neuron_class(:,cnumber), 1, 'B');

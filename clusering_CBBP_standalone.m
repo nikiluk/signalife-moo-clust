@@ -32,13 +32,13 @@ xlRange_names = 'A1:AL1';
 % Depth
 % Dendrites
 %feature_range = [7 10 13 20 25 26 29 28 31 33]; %Depth, CB, Layer Depth
-feature_range = [7 10 13 20 25 26 29 27 28 33]; %Bifurcation, Depth, Layer Depth
-%feature_range = [7 10 13 20 25 26 29 28 33]; %Depth, Layer Depth
+feature_range = [7 10 13 20 25 26 27 28 29]; %Bifurcation
+%feature_range = [10 20 25 29 28 33]; %Depth, Layer Depth
 %feature_range = [7 10 13 20 25 26 27 28]; %Bifurcation, Depth
 %feature_range = [7 10 13 20 25 26 27 34]; %Bifurcation, RDepth
 
-testcases = 3;
-ssi = 001;
+testcases = 1;
+ssi = 002;
 PCA = 0;
 
 addpath('SRC/exportfig');

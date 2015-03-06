@@ -11,11 +11,11 @@ clc
 %% READ
 
 % file containing features
-filein_features = 'inventory-biocytin-raw-29-electrophydata-regressionclasses.xlsx'; % file containing neuron features data in cells
+filein_features = 'inventory-biocytin-raw-37-layerdepth.xlsx'; % file containing neuron features data in cells
 
 sheet = 1;
-xlRange = 'E3:AQ33'; % AQ angles grouped
-xlRange_names = 'E1:AQ1';
+xlRange = 'E3:AK33'; % AQ angles grouped
+xlRange_names = 'E1:AK1';
 xlRange_neuron_names = 'C3:C33';
 
 [features_all,~,~] = xlsread(filein_features, sheet, xlRange);
@@ -28,7 +28,8 @@ xlRange_neuron_names = 'C3:C33';
 % All
 % {'Diameter','D1','D2','Ramification','Striking','Lambda','Area','Oblate','Prolate','Sphericity','Volume','CB','BP','Dendrites','0-45','45-90','90-135','135-180'}
 % 27 - CB and 28 - BP in um
-feature_range = [25 30];
+
+feature_range = [10 20 25 33 30 31];
 
 
 testcases = 3; % default case that tests ++ +- and == CTIP2/SATB2
@@ -182,7 +183,7 @@ cmap = cmap/255;
 fp = figure('units','normalized','outerposition',[0 0 1 1]);
 set(fp,'DefaultAxesColorOrder',cmap);
 fp = parallelcoords(features_selected, 'group',optimalClustering, 'standardize','on', 'labels',features_names_selected, 'quantile',.75,'LineWidth', 2);
-
+ylim([-2.5 2.5])
 
 % %andrewsplot
 % fa = figure;
@@ -198,17 +199,19 @@ for cr=1:size(features_names_selected,2)
 features_names_selected_cropped = [features_names_selected_cropped, '-', features_names_selected{cr}(1:min(4, length(features_names_selected{cr})))];
 end;
 
+% output to results folder
+resFolder=['res-' datestr(now,'yyyy-mm-dd')];
+mkdir(resFolder);
+fileout_classes = [resFolder,'/out_classes_', num2str(ssi,'%03d'),'_', num2str(nn), 'Biocytin_by',features_names_selected_cropped,'_(', num2str(nn_selected), markerclass_selected, ') PCA=',num2str(PCA),' (', num2str(cnumber) , ' classes)']; % file with classes distributed
 
-fileout_classes = ['out_classes_', num2str(ssi,'%03d'),'_', num2str(nn), 'Biocytin_by',features_names_selected_cropped,'_(', num2str(nn_selected), markerclass_selected, ') PCA=',num2str(PCA),' (', num2str(cnumber) , ' classes)']; % file with classes distributed
-
-fileout_classes_img = [fileout_classes '.png'];
-export_fig(fileout_classes_img, '-transparent');
+%output PDF figure with parallel plot
+export_fig([fileout_classes '.pdf'], '-pdf');
 
 
 xlswrite([fileout_classes '.xlsx'], neuron_class(:,cnumber), 1, 'B');
 xlswrite([fileout_classes '.xlsx'], neuron_names_selected, 1, 'A');
 xlswrite([fileout_classes '.xlsx'], neuron_members([1:cnumber],cnumber), 1, 'C');
 xlswrite([fileout_classes '.xlsx'], features_names_selected.', 1, 'D');
-
+close all
 cmembers=neuron_members([1:cnumber],cnumber);
 
