@@ -12,8 +12,9 @@ About
 ---
 This set of MATLAB scripts have been developed to perform automatic neuron classification using clustering approach. Neurons are treated as objects in the multidimensional feature space. Cluster algorithm groups neuron according to similarities in their feature values. The script is based on K-means++ clustering, but unlike the original method, it doesn't require explicit specification of the cluster number as an input that makes it less biased.
 
-Content
+Project content and use
 ---
+Input should be organized as the datatable where objects (observations) are each placed in separate raws and features organized into a separate columns. Feature selection is done in the header of the scripts and stored as a *feature_range* variable. Next, *features_selected* matrix is transmitted as a clustering input.
 - *clusering_CBBP.m*: 
 	- clustering function for execution in the loop
 - *clusering_CBBP_standalone.m*: 
