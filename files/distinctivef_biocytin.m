@@ -1,7 +1,10 @@
-%
 % plot distinctive features of marker 3 and marker 4, calculate mean,
-% variance and standard deviation
-%
+% variance and standard deviation in biocytin neurons
+% 
+% Project name: SIGNALIFE Neuron Morphology Clustering
+% Author: Nikita Lukianets
+% Email: nikita.lukianets@unice.fr
+% Date: 2015-03-16
 
 clearvars
 close all

@@ -1,7 +1,10 @@
-%
 % this file is performing clusterization of biocytin neurons into the
 % sub-populations and writes result to files
-%
+% 
+% Project name: SIGNALIFE Neuron Morphology Clustering
+% Author: Nikita Lukianets
+% Email: nikita.lukianets@unice.fr
+% Date: 2015-03-16
 
 clearvars
 close all

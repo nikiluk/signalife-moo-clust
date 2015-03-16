@@ -1,6 +1,9 @@
-%
 % this function helps to draw colored silhouette for clusters
-%
+% 
+% Project name: SIGNALIFE Neuron Morphology Clustering
+% Author: Nikita Lukianets
+% Email: nikita.lukianets@unice.fr
+% Date: 2015-03-16
 
 function coloredsilu(k, silh, idx)
 

@@ -1,7 +1,10 @@
-%
-% this file is building the graph of angle distribution distinguishing
+% this file is building the graph of dendrites distribution distinguishing
 % satb2+ and satb2- populations
-%
+% 
+% Project name: SIGNALIFE Neuron Morphology Clustering
+% Author: Nikita Lukianets
+% Email: nikita.lukianets@unice.fr
+% Date: 2015-03-16
 
 clearvars
 close all

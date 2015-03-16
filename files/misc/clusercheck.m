@@ -1,7 +1,10 @@
-%
 % this file should perform evaluation of the number of clusters, but it
 % doesn't work for Matlab R2013a
-%
+% 
+% Project name: SIGNALIFE Neuron Morphology Clustering
+% Author: Nikita Lukianets
+% Email: nikita.lukianets@unice.fr
+% Date: 2015-03-16
 
 clearvars
 close all
