@@ -32,13 +32,13 @@ xlRange_names = 'A1:AL1';
 % Depth
 % Dendrites
 %feature_range = [7 10 13 20 25 26 29 28 31 33]; %Depth, CB, Layer Depth
-feature_range = [7 10 13 20 25 26 27 28 29]; %Bifurcation
+feature_range = [7 10 13 20 25 26 29]; %Bifurcation
 %feature_range = [10 20 25 29 28 33]; %Depth, Layer Depth
 %feature_range = [7 10 13 20 25 26 27 28]; %Bifurcation, Depth
 %feature_range = [7 10 13 20 25 26 27 34]; %Bifurcation, RDepth
 
-testcases = 1;
-ssi = 002;
+testcases = 3;
+ssi = 202;
 PCA = 0;
 
 addpath('SRC/exportfig');
@@ -57,7 +57,7 @@ iterations = 1000;
 %% Apical dendrites info: check where features_all(:,27) is NaN and find positive indexes
 have_CBBP=isnan(features_all(:,27));
 have_CBBP_index=find(have_CBBP==0);
-features_all_have_CBBP = features_all(have_CBBP_index,:);
+features_all_have_CBBP = features_all(:,:);
 
 idx_have_CBBP=[cellstr(num2str(features_all_have_CBBP(:,[1]),'s%02d')) cellstr(num2str(features_all_have_CBBP(:,[2]),'i%02d')) cellstr(num2str(features_all_have_CBBP(:,[3]),'n%02d'))];
 for nn=1:size(idx_have_CBBP,1)
