@@ -8,7 +8,7 @@ Supervision
  - Neuroscience: **Michele Studer**, http://ibv.unice.fr/EN/equipe/studer.php
  - Statistics: **Franck Grammont**, http://math.unice.fr/laboratoire/interactions/neurosciences
 
- About
+About
 ---
 This set of MATLAB scripts have been developed to perform automatic neuron classification using clustering approach. Neurons are treated as objects in the multidimensional feature space. Cluster algorithm groups neuron according to similarities in their feature values. The script is based on K-means++ clustering, but unlike the original method, it doesn't require explicit specification of the cluster number as an input that makes it less biased.
 
