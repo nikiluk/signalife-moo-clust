@@ -15,16 +15,18 @@ This set of MATLAB scripts have been developed to perform automatic neuron class
 Project content and use
 ---
 Input should be organized as the datatable where objects (observations) are each placed in separate raws and features organized into a separate columns. Feature selection is done in the header of the scripts and stored as a *feature_range* variable. Next, *features_selected* matrix is transmitted as a clustering input.
-- *clusering_CBBP.m*: 
+- *clustering_CBBP.m*: 
 	- clustering function for execution in the loop
-- *clusering_CBBP_standalone.m*: 
+- *clustering_CBBP_standalone.m*: 
 	- standalone clustering function
 - *crosscorrelated.m*: 
 	- Cross-correlations of the morphology features
-- *dendrites_destinctive_CBBP.m*: 
+- *distinctivef_CBBP.m*: 
 	- comparison of the populations by distinctive features
-- *runtestcases_clusering_CBBP.m*: 
+- *runtestcases_clustering_CBBP.m*: 
 	- execution of the all possible test cases with selected sets of features
+- *regression_CBBP_standalone.m*: 
+	- machine learning using logistic regression for incomplete set of features to classification biocytin neurons based on a trained set from CBBP neurons
 
 Additional scripts used
 ---
